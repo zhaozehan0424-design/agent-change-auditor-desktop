@@ -1,59 +1,77 @@
-# Agent Change Auditor Desktop Prototype
+# Agent Change Auditor Desktop
 
-Windows 桌面原型，用按钮包装全局 `aca` 命令。
+[![CI](https://github.com/zhaozehan0424-design/agent-change-auditor-desktop/actions/workflows/ci.yml/badge.svg)](https://github.com/zhaozehan0424-design/agent-change-auditor-desktop/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
+A lightweight Windows desktop wrapper for [Agent Change Auditor](https://github.com/zhaozehan0424-design/agent-change-auditor).
+
+It gives the `aca` CLI a simple button-based workflow: select a project, initialize/start an audit, paste the agent claim, stop the audit, and preview the generated reports.
 
 ![Desktop preview](preview.png)
 
-## 启动
+## Download / Portable Use
 
-双击：
+This first release is a portable Windows package. Download the release zip, extract it, then double-click:
 
 ```text
 Start-AgentChangeAuditorDesktop.cmd
 ```
 
-或在 PowerShell 里运行：
+Local development path on the maintainer machine:
 
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\AgentChangeAuditorDesktop.ps1
+```text
+C:\Users\33404\Documents\Codex\agent-change-auditor-desktop
 ```
 
-## 使用流程
+## Requirements
 
-1. 选择项目文件夹。
-2. 如果项目不是 git 仓库，点 `1. 初始化 aca init`。
-3. 填写任务说明，点 `2. 开始记录`。
-4. 让 agent 修改代码。
-5. 粘贴 agent 自述，点 `3. 保存 Agent 自述`。
-6. 填写可选测试/构建命令，点 `4. 停止并生成报告`。
-7. 在下方预览或打开中英文报告。
+- Windows
+- PowerShell 5.1+
+- The `aca` command available in `PATH`
 
-## 说明
-
-这是第一版桌面外壳，不重写核心逻辑。真正的审计仍由
-`agent-change-auditor` CLI 完成。
-
-## 当前能力
-
-- 一键选择要审计的本地项目。
-- 一键初始化审计环境。
-- 手动开始 / 手动停止审计窗口。
-- 保存 Agent 对自己改动的描述，用于和真实 `git diff` 对比。
-- 可填写测试命令、构建命令，报告会记录执行结果。
-- 支持预览中文、英文、默认报告。
-
-## 依赖
-
-需要先能在命令行运行：
+Install/link the CLI first:
 
 ```powershell
+cd C:\Users\33404\Documents\Codex\agent-change-auditor
+npm link
 aca --help
 ```
 
-本机已经通过 `npm link` 安装了全局 `aca`，所以通常直接双击启动器即可。
+## Workflow
 
-## 生成预览图
+1. Click **选择...** and select the project folder to audit.
+2. Click **1. 初始化 aca init** if the project is not a git repository yet.
+3. Fill in the task label and click **2. 开始记录**.
+4. Let an AI coding agent modify the selected project.
+5. Paste the agent's self-summary into **Agent 自述 / Claim** and click **3. 保存 Agent 自述**.
+6. Optionally enter test/build commands.
+7. Click **4. 停止并生成报告**.
+8. Preview or open `AI_CHANGE_AUDIT.zh-CN.md`, `AI_CHANGE_AUDIT.en.md`, or `AI_CHANGE_AUDIT.md`.
+
+## What This App Does
+
+- Wraps the deterministic `aca` CLI; it does not send project code to a model.
+- Keeps the audit window manual: you decide when to start and stop.
+- Helps non-CLI users collect an evidence-based review trail for AI-generated code changes.
+
+## Development Checks
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\AgentChangeAuditorDesktop.ps1 -ScreenshotPath .\preview.png
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-desktop.ps1
 ```
+
+## Package
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\package.ps1
+```
+
+The zip is written to `dist/`.
+
+## Status
+
+See [REPOSITORY_STATUS.md](./REPOSITORY_STATUS.md).
+
+## License
+
+MIT. See [LICENSE](./LICENSE).
