@@ -1,6 +1,6 @@
 # Repository Status
 
-Last reviewed: 2026-06-30
+Last reviewed: 2026-07-05
 Maintainer: @zhaozehan0424-design
 Repository: `zhaozehan0424-design/agent-change-auditor-desktop`
 Project type: Windows PowerShell WinForms desktop wrapper
@@ -31,3 +31,10 @@ Make Agent Change Auditor easier to use for local projects by providing a small 
 - Add automatic CLI discovery/install guidance.
 - Add a richer report viewer with Markdown rendering.
 - Add a project history list.
+
+## 2026-07-05 Maintenance Update
+
+- Fetched `origin/main`; local branch was already aligned with GitHub.
+- Re-ran verification: `scripts/check-desktop.ps1 -> syntax_ok=true, aca_ok=true, screenshot_ok=true`.
+- Portable Windows wrapper still launches and generates a preview screenshot.
+- No release-blocking maintenance issue found in this pass.
